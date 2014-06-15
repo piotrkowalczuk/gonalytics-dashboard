@@ -1,0 +1,12 @@
+https://www.djangoproject.com/download/1.7.b4/tarball/
+django-widget-tweaks
+PyYAML
+django-static-precompiler
+easy-thumbnails
+django-grappelli
+django-filebrowser
+django-tinymce
+django-bower
+django-less
+pillow
+requests

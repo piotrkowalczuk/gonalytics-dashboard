@@ -1,0 +1,14 @@
+- model: user.user
+  pk: 1
+  fields:
+    email: admin@admin.pl
+    first_name: Admin
+    last_name: Administrator
+    is_active: true
+    is_staff: true
+    is_superuser: true
+    last_login: 2013-08-18 19:17:53
+    password: pbkdf2_sha256$10000$AjRxwPTq6aRr$KQmoW2vC/xE7GZazkAmPvFwww1i3J1lo7LPDv/jPOY4=
+    updated_at: 2013-08-18 19:17:53
+    user_permissions: []
+    created_at: 2013-08-18 19:17:53

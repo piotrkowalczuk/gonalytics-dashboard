@@ -1,0 +1,7 @@
+from django.conf.urls import patterns, url
+from dashboard.views import Dashboard
+
+urlpatterns = patterns(
+    '',
+    url(r'^show/$', Dashboard.as_view(), name='dashboard'),
+)

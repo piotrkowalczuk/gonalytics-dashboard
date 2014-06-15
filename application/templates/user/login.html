@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Gowik - Login{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-4 col-lg-offset-4">
+        <h1>Log in</h1>
+
+        {% if registered %}
+            <p>already logged in</p>
+        {% else %}
+
+        <form id="user_log_in" method="post" action="/user/login/"
+                enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Display each form. The as_p method wraps each element in a paragraph
+                 (<p>) element. This ensures each element appears on a new line,
+                 making everything look neater. -->
+            {{ login_form.as_p }}
+
+            <!-- Provide a button to click to submit the form. -->
+            <input type="submit" name="submit" value="Login" class="btn btn-primary"/>
+        </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% if reports %}
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Title</th>
+                    <th>Host</th>
+                    <th>Url</th>
+                    <th>Name</th>
+                    <th>Referrer</th>
+                    <th>Application name</th>
+                    <th>Language</th>
+                    <th>Cookie</th>
+                    <th>Java</th>
+                    <th>User agent</th>
+                    <th>Browser Version</th>
+                    <th>Browser Version Minor</th>
+                    <th>Screen Width</th>
+                    <th>Screen Height</th>
+                </tr>
+                {% for report in reports %}
+                    <tr>
+                        <td>{{ report.WebsiteTitle }}</td>
+                        <td>{{ report.WebsiteHost }}</td>
+                        <td>{{ report.WebsiteUrl }}</td>
+                        <td>{{ report.Name }}</td>
+                        <td>{{ report.Referrer }}</td>
+                        <td>{{ report.AppName }}</td>
+                        <td>{{ report.Language }}</td>
+                        <td><i class="{% if report.Cookie %}glyphicon glyphicon-ok{% else %}glyphicon glyphicon-remove{% endif %}"></i></td>
+                        <td><i class="{% if report.Java %}glyphicon glyphicon-ok{% else %}glyphicon glyphicon-remove{% endif %}"></i></td>
+                        <td>{{ report.UserAgent }}</td>
+                        <td>{{ report.BrowserVersion }}</td>
+                        <td>{{ report.BrowserVersionMinor }}</td>
+                        <td>{{ report.ScreenWidth }}px</td>
+                        <td>{{ report.ScreenHeight }}px</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endif %}

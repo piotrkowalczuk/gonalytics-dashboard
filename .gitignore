@@ -1,0 +1,12 @@
+.DS_Store
+*.pyc
+.idea
+venv
+application/gowik/settings.py
+application/auto_static
+application/vendors
+application/static/css
+application/static/vendors
+application/media/uploads
+build
+venv
