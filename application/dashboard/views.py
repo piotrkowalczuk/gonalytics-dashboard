@@ -8,11 +8,12 @@ class Dashboard(View):
 
     @method_decorator(login_required)
     def get(self, request):
-        r = requests.get('http://localhost:8080/reports')
+        r = requests.get('http://localhost:8080/actions')
+
         return render(
             request,
             'dashboard/show.html',
             {
-                'reports': r.json()
+                'actions': r.json()
             }
         )

@@ -1,0 +1,46 @@
+{% if actions %}
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Title</th>
+                    <th>Host</th>
+                    <th>Url</th>
+                    <th>Name</th>
+                    <th>Referrer</th>
+                    <th>Application name</th>
+                    <th>Language</th>
+                    <th>Cookie</th>
+                    <th>Java</th>
+                    <th>User agent</th>
+                    <th>Browser Version</th>
+                    <th>Browser Version Minor</th>
+                    <th>Screen Width</th>
+                    <th>Screen Height</th>
+                    <th>Created At</th>
+                </tr>
+                {% for action in actions %}
+                    <tr>
+                        <td>{{ action.websiteTitle }}</td>
+                        <td>{{ action.websiteHost }}</td>
+                        <td>{{ action.websiteUrl }}</td>
+                        <td>{{ action.name }}</td>
+                        <td>{{ action.referrer }}</td>
+                        <td>{{ action.appName }}</td>
+                        <td>{{ action.language }}</td>
+                        <td><i class="{% if action.cookie %}glyphicon glyphicon-ok{% else %}glyphicon glyphicon-remove{% endif %}"></i></td>
+                        <td><i class="{% if action.java %}glyphicon glyphicon-ok{% else %}glyphicon glyphicon-remove{% endif %}"></i></td>
+                        <td>{{ action.userAgent }}</td>
+                        <td>{{ action.browserVersion }}</td>
+                        <td>{{ action.browserVersionMinor }}</td>
+                        <td>{{ action.screenWidth }}px</td>
+                        <td>{{ action.screenHeight }}px</td>
+                        <td>
+                            {{ action.createdAt.dateTime }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endif %}
