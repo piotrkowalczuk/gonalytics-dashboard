@@ -8,12 +8,20 @@ class Dashboard(View):
 
     @method_decorator(login_required)
     def get(self, request):
-        r = requests.get('http://localhost:8080/actions')
+        actions = requests.get('http://localhost:8080/actions')
+        nbOfActionsToday = requests.get('http://localhost:8080/actions/count?dateTimeRange=2014-07-20-day')
+        nbOfActionsThisWeek = requests.get('http://localhost:8080/actions/count?dateTimeRange=2014-29-week')
+        nbOfActionsThisMonth = requests.get('http://localhost:8080/actions/count?dateTimeRange=2014-07-month')
+        nbOfActionsThisYear = requests.get('http://localhost:8080/actions/count?dateTimeRange=2014-year')
 
         return render(
             request,
             'dashboard/show.html',
             {
-                'actions': r.json()
+                'actions': actions.json(),
+                'nbOfActionsToday': nbOfActionsToday.json(),
+                'nbOfActionsThisWeek': nbOfActionsThisWeek.json(),
+                'nbOfActionsThisMonth': nbOfActionsThisMonth.json(),
+                'nbOfActionsThisYear': nbOfActionsThisYear.json(),
             }
         )

@@ -9,7 +9,46 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">Actions</div>
+            <table class="table">
+                <tr>
+                    <td>
+                        <strong>today: </strong>
+                    </td>
+                    <td>
+                        {{ nbOfActionsToday }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>this week: </strong>
+                    </td>
+                    <td>
+                        {{ nbOfActionsThisWeek }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>this month: </strong>
+                    </td>
+                    <td>
+                        {{ nbOfActionsThisMonth }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>this year: </strong>
+                    </td>
+                    <td>
+                        {{ nbOfActionsThisYear }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-lg-9">
         {% include 'dashboard/_actions.html' %}
     </div>
 </div>
