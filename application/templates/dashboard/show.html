@@ -11,14 +11,14 @@
 <div class="row">
     <div class="col-lg-3">
         <div class="panel panel-default">
-            <div class="panel-heading">Actions</div>
+            <div class="panel-heading">Visits</div>
             <table class="table">
                 <tr>
                     <td>
                         <strong>today: </strong>
                     </td>
                     <td>
-                        {{ nbOfActionsToday }}
+                        {{ nbOfVisitsToday }}
                     </td>
                 </tr>
                 <tr>
@@ -26,7 +26,7 @@
                         <strong>this week: </strong>
                     </td>
                     <td>
-                        {{ nbOfActionsThisWeek }}
+                        {{ nbOfVisitsThisWeek }}
                     </td>
                 </tr>
                 <tr>
@@ -34,7 +34,7 @@
                         <strong>this month: </strong>
                     </td>
                     <td>
-                        {{ nbOfActionsThisMonth }}
+                        {{ nbOfVisitsThisMonth }}
                     </td>
                 </tr>
                 <tr>
@@ -42,14 +42,14 @@
                         <strong>this year: </strong>
                     </td>
                     <td>
-                        {{ nbOfActionsThisYear }}
+                        {{ nbOfVisitsThisYear }}
                     </td>
                 </tr>
             </table>
         </div>
     </div>
     <div class="col-lg-9">
-        {% include 'dashboard/_actions.html' %}
+        {% include 'dashboard/_visits.html' %}
     </div>
 </div>
 {% endblock %}

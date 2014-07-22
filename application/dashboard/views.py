@@ -8,20 +8,20 @@ class Dashboard(View):
 
     @method_decorator(login_required)
     def get(self, request):
-        actions = requests.get('http://localhost:8080/actions')
-        nbOfActionsToday = requests.get('http://localhost:8080/actions/count?dateTimeRange=2014-07-20-day')
-        nbOfActionsThisWeek = requests.get('http://localhost:8080/actions/count?dateTimeRange=2014-29-week')
-        nbOfActionsThisMonth = requests.get('http://localhost:8080/actions/count?dateTimeRange=2014-07-month')
-        nbOfActionsThisYear = requests.get('http://localhost:8080/actions/count?dateTimeRange=2014-year')
+        visits = requests.get('http://localhost:8080/visits')
+        nbOfVisistsToday = requests.get('http://localhost:8080/visits/count?dateTimeRange=2014-07-21-day')
+        nbOfVisistsThisWeek = requests.get('http://localhost:8080/visits/count?dateTimeRange=2014-30-week')
+        nbOfVisistsThisMonth = requests.get('http://localhost:8080/visits/count?dateTimeRange=2014-07-month')
+        nbOfVisistsThisYear = requests.get('http://localhost:8080/visits/count?dateTimeRange=2014-year')
 
         return render(
             request,
             'dashboard/show.html',
             {
-                'actions': actions.json(),
-                'nbOfActionsToday': nbOfActionsToday.json(),
-                'nbOfActionsThisWeek': nbOfActionsThisWeek.json(),
-                'nbOfActionsThisMonth': nbOfActionsThisMonth.json(),
-                'nbOfActionsThisYear': nbOfActionsThisYear.json(),
+                'visits': visits.json(),
+                'nbOfVisitsToday': nbOfVisistsToday.json(),
+                'nbOfVisitsThisWeek': nbOfVisistsThisWeek.json(),
+                'nbOfVisitsThisMonth': nbOfVisistsThisMonth.json(),
+                'nbOfVisitsThisYear': nbOfVisistsThisYear.json(),
             }
         )
