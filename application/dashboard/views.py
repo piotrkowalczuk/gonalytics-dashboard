@@ -2,26 +2,26 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import View
 from django.shortcuts import render
+from datetime import date
 import requests
 
 class Dashboard(View):
 
     @method_decorator(login_required)
     def get(self, request):
-        visits = requests.get('http://localhost:8080/visits')
-        nbOfVisistsToday = requests.get('http://localhost:8080/visits/count?dateTimeRange=2014-07-21-day')
-        nbOfVisistsThisWeek = requests.get('http://localhost:8080/visits/count?dateTimeRange=2014-30-week')
-        nbOfVisistsThisMonth = requests.get('http://localhost:8080/visits/count?dateTimeRange=2014-07-month')
-        nbOfVisistsThisYear = requests.get('http://localhost:8080/visits/count?dateTimeRange=2014-year')
+        dateTimeRange = request.GET.get('dateTimeRange', date.today().strftime("%Y-%m-%d-day"))
+
+        nbOfVisits = requests.get('http://localhost:8080/visits/count?dateTimeRange='+dateTimeRange)
+        nbOfActions = requests.get('http://localhost:8080/visits/actions/count?dateTimeRange='+dateTimeRange)
+        nbOfCountries = requests.get('http://localhost:8080/visits/countries/count?dateTimeRange='+dateTimeRange)
 
         return render(
             request,
             'dashboard/show.html',
             {
-                'visits': visits.json(),
-                'nbOfVisitsToday': nbOfVisistsToday.json(),
-                'nbOfVisitsThisWeek': nbOfVisistsThisWeek.json(),
-                'nbOfVisitsThisMonth': nbOfVisistsThisMonth.json(),
-                'nbOfVisitsThisYear': nbOfVisistsThisYear.json(),
+                'nbOfVisits': nbOfVisits.json(),
+                'nbOfActions': nbOfActions.json(),
+                'nbOfCountries': nbOfCountries.json(),
+                'today': date.today(),
             }
         )

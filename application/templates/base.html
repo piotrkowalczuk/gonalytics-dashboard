@@ -15,19 +15,20 @@
     {% endblock %}
     <title>{% block title %}Gowik{% endblock %}</title>
 </head>
-
 <body>
-	{% block navbar %}
-		{% include 'navbar.html' %}
-	{% endblock %}
-    <div class="container">
-		{% include 'flash.html' %}
+	<div id="wrapper">
+		{% block navbar %}
+			{% include 'navbar.html' %}
+		{% endblock %}
+		<div id="page-wrapper">
+			{% block content %}
+			{% endblock %}
+		</div>
+	</div>
 
-        {% block content %}
-        {% endblock %}
-    </div>
+	<!-- Custom Theme JavaScript -->
+	<script src="{% static 'js/sb-admin-2.js' %}"></script>
+	<script type="text/javascript" src='{% static 'js/script.js' %}'></script>
 
-    <!-- scripts -->
-    <script type="text/javascript" src='{% static 'js/script.js' %}'></script>
 </body>
 </html>

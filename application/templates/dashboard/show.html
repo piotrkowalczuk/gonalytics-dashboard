@@ -4,52 +4,109 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="page-header">
-            <h1>Dashboard <small>list</small></h1>
+            <h1>
+                Dashboard <small>today</small>
+                <div class="dropdown pull-right">
+                    <a data-toggle="dropdown" href="#"><i class="fa fa-calendar" style="font-size: 24px;"></i></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <li><a href="/?dateTimeRange={{ today|date:'Y-m-d' }}-day">Today</a></li>
+                        <li><a href="/?dateTimeRange={{ today|date:'Y-W' }}-week">This week</a></li>
+                        <li><a href="/?dateTimeRange={{ today|date:'Y-m' }}-month">This month</a></li>
+                        <li><a href="/?dateTimeRange={{ today|date:'Y' }}-year">This year</a></li>
+                    </ul>
+                </div>
+            </h1>
         </div>
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">Visits</div>
-            <table class="table">
-                <tr>
-                    <td>
-                        <strong>today: </strong>
-                    </td>
-                    <td>
-                        {{ nbOfVisitsToday }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>this week: </strong>
-                    </td>
-                    <td>
-                        {{ nbOfVisitsThisWeek }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>this month: </strong>
-                    </td>
-                    <td>
-                        {{ nbOfVisitsThisMonth }}
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <strong>this year: </strong>
-                    </td>
-                    <td>
-                        {{ nbOfVisitsThisYear }}
-                    </td>
-                </tr>
-            </table>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-child fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">{{ nbOfVisits }}</div>
+                        <div>Visits</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{% url 'visit_list' %}">
+                <div class="panel-footer">
+                    <span class="pull-left">Entire list</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
         </div>
     </div>
-    <div class="col-lg-9">
-        {% include 'dashboard/_visits.html' %}
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-eye fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">{{ nbOfActions }}</div>
+                        <div>Page views</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{% url 'visit_list' %}">
+                <div class="panel-footer">
+                    <span class="pull-left">Entire list</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-globe fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div class="huge">{{ nbOfCountries }}</div>
+                        <div>Countries</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-red">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-clock-o fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+                        <div>Avarage visit</div>
+                        <div class="huge">{{ nbOfVisitsToday }} h</div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <span class="pull-left">Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
     </div>
 </div>
 {% endblock %}
