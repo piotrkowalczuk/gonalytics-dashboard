@@ -101,6 +101,10 @@ STATICFILES_DIRS = (os.path.join(os.path.dirname(__file__), '..', 'static').repl
 
 AUTH_USER_MODEL = 'user.User'
 
+LOGIN_URL = '/user/login'
+
+LOGIN_REDIRECT_URL = LOGIN_URL
+
 BOWER_COMPONENTS_ROOT = os.path.join(os.path.dirname(__file__), '..', 'static/vendors').replace('\\','/')
 
 BOWER_PATH = '/usr/local/bin/bower'

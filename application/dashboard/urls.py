@@ -3,5 +3,5 @@ from dashboard.views import Dashboard
 
 urlpatterns = patterns(
     '',
-    url(r'^show/$', Dashboard.as_view(), name='dashboard'),
+    url(r'^$', Dashboard.as_view(), name='dashboard'),
 )
