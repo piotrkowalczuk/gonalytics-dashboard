@@ -10,3 +10,4 @@ django-bower
 django-less
 pillow
 requests
+json-datetime

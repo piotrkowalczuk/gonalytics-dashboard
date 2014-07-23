@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
 <div class="row">
     <div class="col-lg-12">
@@ -108,5 +110,84 @@
             </a>
         </div>
     </div>
+</div>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Visits list in real time
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-condensed">
+                        <tbody>
+                            {% for visit in visitsLive %}
+                                <tr class="active">
+                                    <td>
+                                        <i class="fa fa-file"></i>
+                                    </td>
+                                    <td>
+                                        <strong>{{ visit.lastPage.title }}</strong><br><em>{{ visit.lastPage.url }}</em>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-calendar"></i></td>
+                                    <td>{{ visit.lastActionAt }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-user"></i></td>
+                                    <td>
+                                        <img src="{% static 'images/flags/16/' %}{{ visit.location.countryCode }}.png" alt="{{ visit.location.countryName }}">
+                                        {% if visit.device.isPhone %}<i class="fa fa-mobile" data-toggle="tooltip" data-placement="top" title="Visit made from mobile phone"></i>{% endif %}
+                                        {% if visit.device.isTablet %}<i class="fa fa-tablet" data-toggle="tooltip" data-placement="top" title="Visit made from tablet"></i>{% endif %}
+                                        <span class="fontelico-{{ visit.browser.name|lower }}" data-toggle="tooltip" data-placement="top" title="{{ visit.browser.name }}"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-sign-in"></i></td>
+                                    <td>{{ visit.referrer|default:"direct" }}</td>
+                                </tr>
+                                <tr>
+                                    <td><i class="fa fa-code-fork"></i></td>
+                                    <td>
+                                        {% for action in visit.actions %}
+                                            <i class="fa fa-cube" title="{{ action.page.title }}" data-toggle="tooltip" data-placement="top"></i>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <a href="#" class="btn btn-default btn-block"><i class="fa fa-list"></i> Entire List</a>
+            </div>
+        </div>
+    </div>
+<div class="col-lg-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Visits
+        </div>
+        <div class="panel-body">
+            <div id="morris-area-chart" style="height: 200px;"></div>
+        </div>
+        <script>
+            $(function() {
+                Morris.Area({
+                    element: 'morris-area-chart',
+                    data: {{ visits|safe }},
+                    xkey: 'lastActionAt',
+                    ykeys: ['nbOfActions'],
+                    labels: ['Number of actions'],
+                    pointSize: 3,
+                    smooth: false,
+                    fillOpacity: 0.4,
+                    hideHover: 'auto',
+                    resize: true
+                });
+            });
+        </script>
+    </div>
+</div>
 </div>
 {% endblock %}
