@@ -8,13 +8,16 @@
 	    <link rel="Shortcut icon" href="{{ STATIC_URL }}images/favicon.gif" />
         <!-- style -->
         <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css" media="screen" />
+        <link href="{% static 'vendors/jvectormap/jquery-jvectormap-1.2.2.css' %}" rel="stylesheet" type="text/css" media="screen" />
 
         <script type="text/javascript" src='{% static 'jquery/dist/jquery.min.js' %}'></script>
         <script type="text/javascript" src='{% static 'bootstrap/dist/js/bootstrap.min.js' %}'></script>
         <script type="text/javascript" src='{% static 'raphael/raphael-min.js' %}'></script>
         <script type="text/javascript" src='{% static 'morris.js/morris.min.js' %}'></script>
+        <script type="text/javascript" src='{% static 'vendors/jvectormap/jquery-jvectormap-1.2.2.min.js' %}'></script>
+        <script type="text/javascript" src='{% static 'vendors/jvectormap/jquery-jvectormap-world-mill-en.js' %}'></script>
     {% endblock %}
-    <title>{% block title %}Gowik{% endblock %}</title>
+    <title>{% block title %}Gonalytics{% endblock %}</title>
 </head>
 <body>
 	<div id="wrapper">

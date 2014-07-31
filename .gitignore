@@ -2,7 +2,7 @@
 *.pyc
 .idea
 venv
-application/gowik/settings.py
+application/gonalytics/settings.py
 application/auto_static
 application/vendors
 application/static/css

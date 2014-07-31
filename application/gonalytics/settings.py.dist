@@ -1,5 +1,5 @@
 """
-Django settings for gowik project.
+Django settings for gonalytics project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/dev/topics/settings/
@@ -60,9 +60,9 @@ STATICFILES_FINDERS = (
     'less.finders.LessFinder',
 )
 
-ROOT_URLCONF = 'gowik.urls'
+ROOT_URLCONF = 'gonalytics.urls'
 
-WSGI_APPLICATION = 'gowik.wsgi.application'
+WSGI_APPLICATION = 'gonalytics.wsgi.application'
 
 
 # Database
@@ -71,10 +71,10 @@ WSGI_APPLICATION = 'gowik.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'gowik',                      # Or path to database file if using sqlite3.
+        'NAME': 'gonalytics',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'gowik',
-        'PASSWORD': 'gowik.123',
+        'USER': 'gonalytics',
+        'PASSWORD': 'gonalytics.123',
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',                      # Set to empty string for default.
     }
@@ -113,8 +113,12 @@ BOWER_INSTALLED_APPS = (
     'jquery#1.9',
     'underscore',
     'bootstrap',
+    'components-font-awesome',
+    'morris.js',
 )
 
 LESS_OUTPUT_DIR = 'compiled'
 
 LESS_USE_CACHE = False
+
+GONALYTICS_TRACKER_URL = 'http://127.0.0.1:8080'

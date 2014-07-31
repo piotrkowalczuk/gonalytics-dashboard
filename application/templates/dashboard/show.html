@@ -7,7 +7,7 @@
     <div class="col-lg-12">
         <div class="page-header">
             <h1>
-                Dashboard <small>today</small>
+                Dashboard
                 <div class="dropdown pull-right">
                     <a data-toggle="dropdown" href="#"><i class="fa fa-calendar" style="font-size: 24px;"></i></a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
@@ -96,8 +96,8 @@
                         <i class="fa fa-clock-o fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div>Avarage visit</div>
-                        <div class="huge">{{ nbOfVisitsToday }} h</div>
+                        <div>Average visit</div>
+                        <div class="huge">{{ averageDuration|floatformat:1 }} <small style="font-size: 10px;">min</small></div>
                     </div>
                 </div>
             </div>
@@ -112,6 +112,91 @@
     </div>
 </div>
 <div class="row">
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Visits per hour
+                    </div>
+                    <div class="panel-body">
+                        <div id="morris-area-chart" style="height: 200px; margin-bottom: 50px;"></div>
+                    </div>
+                    <script>
+                        $(function() {
+                            Morris.Area({
+                                element: 'morris-area-chart',
+                                data: {{ visitsGroupedByFirstAction|safe }},
+                                xkey: 'dateTime',
+                                ykeys: ['amount'],
+                                labels: ['Number of actions'],
+                                pointSize: 3,
+                                smooth: true,
+                                fillOpacity: 0.4,
+                                hideHover: 'auto',
+                                resize: true
+                            });
+                        });
+                    </script>
+                    <div class="panel-footer">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Countries
+                    </div>
+                    <div class="panel-body">
+                        <div id="world-map" style="height:300px"></div>
+                        <script>
+                        $(document).ready(function() {
+                            var regionData = {{ visitsGroupedByCountryCode|safe }};
+                            $(function(){
+                                $('#world-map').vectorMap({
+                                    backgroundColor: '#fff',
+                                    series: {
+                                        regions: [{
+                                            values: regionData,
+                                            scale: ['#C8EEFF', '#0071A4'],
+                                            normalizeFunction: 'polynomial'
+                                        }]
+                                    },
+                                    onRegionLabelShow: function(e, el, code){
+                                        var nbOfVisits = regionData[code] || 0;
+                                        el.html(el.html()+' (Visits - '+nbOfVisits+')');
+                                    },
+                                    hoverColor: false,
+                                    regionStyle: {
+                                        initial: {
+                                            "fill": '#A7C8E1',
+                                            "fill-opacity": 1,
+                                            "stroke": 'none',
+                                            "stroke-width": 0,
+                                            "stroke-opacity": 1
+                                        },
+                                        hover: {
+                                            "fill-opacity": 0.8
+                                        },
+                                        selected: {
+                                            fill: '#ff0000'
+                                        },
+                                        selectedHover: {
+                                            fill: '#ff0000'
+                                        }
+                                    }
+                                });
+                            });
+                        });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-lg-6">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -163,31 +248,5 @@
             </div>
         </div>
     </div>
-<div class="col-lg-6">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            Visits
-        </div>
-        <div class="panel-body">
-            <div id="morris-area-chart" style="height: 200px;"></div>
-        </div>
-        <script>
-            $(function() {
-                Morris.Area({
-                    element: 'morris-area-chart',
-                    data: {{ visits|safe }},
-                    xkey: 'lastActionAt',
-                    ykeys: ['nbOfActions'],
-                    labels: ['Number of actions'],
-                    pointSize: 3,
-                    smooth: false,
-                    fillOpacity: 0.4,
-                    hideHover: 'auto',
-                    resize: true
-                });
-            });
-        </script>
-    </div>
-</div>
 </div>
 {% endblock %}
