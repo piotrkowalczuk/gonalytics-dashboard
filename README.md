@@ -8,6 +8,7 @@ Gonalytic is a open source web analytics application. It consists of:
 
 Installation
 ------------
+
 1. Create virtual environment: `virtualenv venv`
 2. Activate virtual environement: `. venv/bin/activate`
 3. Install dependencies: `pip install -r requirements/dev.pip`
@@ -19,9 +20,11 @@ Installation
 
 Dependencies
 ------------
+
 - MySQL/PostgreSQL
-- 
+
 
 Screenshots
 ------------
+
 ![Main Page](/screenshots/main_page.png?raw=true "Main Page")
