@@ -1,4 +1,4 @@
-Gonalytics (tracker)
+Gonalytics (dashboard)
 =============
 
 Gonalytic is a open source web analytics application. It consists of:
