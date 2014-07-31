@@ -20,3 +20,8 @@ Installation
 Dependencies
 ------------
 - MySQL/PostgreSQL
+- 
+
+Screenshots
+------------
+![Main Page](/screenshots/main_page.png?raw=true "Main Page")
