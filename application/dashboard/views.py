@@ -16,27 +16,46 @@ class Dashboard(View):
     def get(self, request):
         dateTimeRange = request.GET.get('dateTimeRange', date.today().strftime("%Y-%m-%d-day"))
 
-        visitsLive = requests.get(settings.GONALYTICS_TRACKER_URL+'/visits/live?limit=5&outputFormat=json')
-        visitsGroupedByFirstAction = requests.get(settings.GONALYTICS_TRACKER_URL+'/visits/group/first-action/'+dateTimeRange+'?outputFormat=json')
-        visitsGroupedByCountryCode = requests.get(settings.GONALYTICS_TRACKER_URL+'/visits/group/country-code/'+dateTimeRange+'?outputFormat=json')
+        nbOfActionsByCountryResponse = requests.get(settings.GONALYTICS_TRACKER_URL+'/sites/1/nb-of-actions-by-country?=timestamp='+dateTimeRange)
+        nbOfActionsByBrowserResponse = requests.get(settings.GONALYTICS_TRACKER_URL+'/sites/1/nb-of-actions-by-browser?=timestamp='+dateTimeRange)
 
-        nbOfVisits = requests.get(settings.GONALYTICS_TRACKER_URL+'/visits/count?dateTimeRange='+dateTimeRange+'&outputFormat=json')
-        nbOfActions = requests.get(settings.GONALYTICS_TRACKER_URL+'/visits/actions/count?dateTimeRange='+dateTimeRange+'&outputFormat=json')
-        nbOfCountries = requests.get(settings.GONALYTICS_TRACKER_URL+'/visits/countries/count?dateTimeRange='+dateTimeRange+'&outputFormat=json')
-        averageDuration = requests.get(settings.GONALYTICS_TRACKER_URL+'/visits/average-duration?dateTimeRange='+dateTimeRange+'&outputFormat=json')
+        nbOfVisitsByCountryResponse = requests.get(settings.GONALYTICS_TRACKER_URL+'/sites/1/nb-of-visits-by-country?=timestamp='+dateTimeRange)
+        nbOfVisitsByBrowserResponse = requests.get(settings.GONALYTICS_TRACKER_URL+'/sites/1/nb-of-visits-by-browser?=timestamp='+dateTimeRange)
+
+        nbOfActionsByCountry = nbOfActionsByCountryResponse.json()
+        nbOfActionsByBrowser = nbOfActionsByBrowserResponse.json()
+        nbOfVisitsByCountry = nbOfVisitsByCountryResponse.json()
+        nbOfVisitsByBrowser = nbOfVisitsByBrowserResponse.json()
+
+        nbOfActions = 0
+        nbOfVisits = 0
+        visitsGroupedByCountryCode = {}
+
+        for nbOfActionsForBrowser in nbOfActionsByBrowser:
+            nbOfActions += nbOfActionsForBrowser['count']
+
+        for nbOfVisitsForBrowser in nbOfVisitsByBrowser:
+            nbOfVisits += nbOfVisitsForBrowser['count']
+
+        for nbOfActionsForCountry in nbOfActionsByCountry:
+            visitsGroupedByCountryCode[nbOfActionsForCountry['locationCountryCode']] = nbOfActionsForCountry['count']
 
         return render(
             request,
             'dashboard/show.html',
             {
-                'visitsGroupedByFirstAction': json.loads(json.dumps(visitsGroupedByFirstAction.text, default=dthandler)),
-                'visitsGroupedByCountryCode': json.loads(json.dumps(visitsGroupedByCountryCode.text, default=dthandler)),
-                'visitsLive': visitsLive.json(),
-                'nbOfVisits': nbOfVisits.json(),
-                'nbOfActions': nbOfActions.json(),
-                'nbOfCountries': nbOfCountries.json(),
+                'nbOfActions': nbOfActions,
+                'nbOfVisits': nbOfVisits,
+                'nbOfCountries': len(nbOfVisitsByCountry),
+                'nbOfActionsByCountry': nbOfActionsByCountry,
+                'nbOfActionsByBrowser': nbOfActionsByBrowser,
+                'nbOfVisitsByCountry': nbOfVisitsByCountry,
+                'nbOfVisitsByBrowser': nbOfVisitsByBrowser,
+                'visitsGroupedByCountryCode': json.dumps(visitsGroupedByCountryCode, default=dthandler),
+                # 'distributionByTime': json.loads(json.dumps(visitsGroupedByCountryCode, default=dthandler)),
+                # 'visitsLive': visitsLive.json(),
                 'today': date.today(),
-                'averageDuration': averageDuration.json() / (6000000000.00),
+                # 'averageDuration': averageDuration.json() / (6000000000.00),
             }
         )
 
